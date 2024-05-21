@@ -16,7 +16,7 @@ export default function Header() {
     pathname === '/'
     , [pathname])
 
-  const { fetchCategories, categories, searchRecipes } = useAppStore()
+  const { fetchCategories, categories, searchRecipes,showNotification } = useAppStore()
 
 
   useEffect(() => {
@@ -35,7 +35,10 @@ export default function Header() {
 
     //Validar
     if (Object.values(searchFilters).includes('')) {
-      console.log('Todos los campos son obligatorios');
+      showNotification({
+        text:'Todos los campos son obligatorios',
+        error:true
+      })
       return
     }
     searchRecipes(searchFilters)
